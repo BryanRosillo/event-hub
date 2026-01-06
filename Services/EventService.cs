@@ -1,14 +1,22 @@
 public class EventService
 {
     private readonly List<Event> _eventList;
+    private int _nextId = 1;
 
     public EventService()
     {
         _eventList = new List<Event>();
     }
+
+    public async Task AddEventAsync(Event ev)
+    {
+        ev.Id = _nextId++;
+        _eventList.Add(ev);
+        await Task.CompletedTask;
+    }
     public async Task<IEnumerable<Event>> GetAllEventsAsync()
     {
-        await Task.Delay(1000);
+        await Task.Delay(500);
         return _eventList;
     }
 
