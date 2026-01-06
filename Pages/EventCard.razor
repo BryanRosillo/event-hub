@@ -1,22 +1,35 @@
 @page "/event/{id:int}"
 @inject EventService EventService
 
-<h1>@eventSelected.Name</h1>
-<h3>Descripcion:</h3><br />
-<p>@eventSelected.Description</p>
+@if (eventSelected == null)
+{
+    <p>Requested event not found.</p>
+}
+else
+{
+    <h1>@eventSelected.Name</h1>
+    <h3>Description:</h3>
 
-<h3>Location:</h3><br />
-<p>@eventSelected.Location</p>
+    <br />
+    <p>@eventSelected.Description</p>
 
-<h3>Date:</h3><br />
-<p>@eventSelected.Date</p>
+    <h3>Location:</h3>
 
-@code{
+    <br />
+    <p>@eventSelected.Location</p>
+
+    <h3>Date:</h3>
+
+    <br />
+    <p>@eventSelected.Date</p>
+}
+
+@code {
 
     [Parameter]
-    public int id {get; set;}
+    public int id { get; set; }
 
-    public Event eventSelected {get; set;}
+    public Event? eventSelected { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
