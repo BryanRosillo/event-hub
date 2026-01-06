@@ -2,6 +2,9 @@ using System.ComponentModel.DataAnnotations;
 
 public class Event
 {
+
+    public int Id {get; set;}
+
     [Required(ErrorMessage = "Event name is required.")]
     [MaxLength(100, ErrorMessage = "Event name cannot exceed 100 characters.")]
     public string Name { get; set; }

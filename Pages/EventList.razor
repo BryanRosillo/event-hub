@@ -2,7 +2,7 @@
 @inject EventService EventService
 
 <h2>Events</h2>
-@if (Events.Count==0)
+@if (Events.Count == 0)
 {
     <p>No events available.</p>
 }
@@ -12,17 +12,16 @@ else
         @foreach (var ev in Events)
         {
             <li>
-                <h3>@ev.Name</h3>
-                <p><strong>Description:</strong> @ev.Description</p>
-                <p><strong>Date:</strong> @ev.Date.ToShortDateString()</p>
-                <p><strong>Location:</strong> @ev.Location</p>
+                <NavLink href="@($"/event/{ev.Id}")">
+                    <h3>@ev.Name</h3>
+                </NavLink>
             </li>
         }
     </ul>
 }
 
-@code{
-    public List<Event> Events {get; set;} = new ();
+@code {
+    public List<Event> Events { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {

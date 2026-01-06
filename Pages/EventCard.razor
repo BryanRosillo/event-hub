@@ -1,25 +1,26 @@
-@page "/registration"
+@page "/event/{id:int}"
+@inject EventService EventService
 
-<EditForm Model="@Event">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+<h1>@eventSelected.Name</h1>
+<h3>Descripcion:</h3><br />
+<p>@eventSelected.Description</p>
 
-    <div class="event-card">
-        <h2>Event name:</h2>
-        <InputText @bind-Value="Event.Name" placeholder="Event Name" />
+<h3>Location:</h3><br />
+<p>@eventSelected.Location</p>
 
-        <p><strong>Description:</strong><br />
-        <InputTextArea @bind-Value="Event.Description" placeholder="Event Description" /></p>
-
-        <p><strong>Date:</strong> 
-        <InputDate @bind-Value="Event.Date" /></p>
-
-        <p><strong>Location:</strong> 
-        <InputText @bind-Value="Event.Location" placeholder="Event Location" /></p>
-    </div>
-</EditForm>
+<h3>Date:</h3><br />
+<p>@eventSelected.Date</p>
 
 @code{
-    [SupplyParameterFromForm]
-    private Event Event { get; set; } = new Event();
+
+    [Parameter]
+    public int id {get; set;}
+
+    public Event eventSelected {get; set;}
+
+    protected override async Task OnInitializedAsync()
+    {
+        eventSelected = await EventService.FindEventAsync(id);
+    }
+
 }
