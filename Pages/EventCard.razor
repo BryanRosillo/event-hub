@@ -1,0 +1,25 @@
+@page "/registration"
+
+<EditForm Model="@Event">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="event-card">
+        <h2>Event name:</h2>
+        <InputText @bind-Value="Event.Name" placeholder="Event Name" />
+
+        <p><strong>Description:</strong><br />
+        <InputTextArea @bind-Value="Event.Description" placeholder="Event Description" /></p>
+
+        <p><strong>Date:</strong> 
+        <InputDate @bind-Value="Event.Date" /></p>
+
+        <p><strong>Location:</strong> 
+        <InputText @bind-Value="Event.Location" placeholder="Event Location" /></p>
+    </div>
+</EditForm>
+
+@code{
+    [SupplyParameterFromForm]
+    private Event Event { get; set; } = new Event();
+}
